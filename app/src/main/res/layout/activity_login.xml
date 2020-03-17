@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_BKG"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@mipmap/bkg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:shadowColor="#ffffff"
+        android:shadowDx="5"
+        android:shadowDy="-5"
+        android:shadowRadius="1"
+        android:text="@string/app_name"
+        android:textColor="#03A9F4"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/spinner_account_suit"
+            android:textSize="15.0sp" />
+
+        <Spinner
+            android:id="@+id/sp_account_suit"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:hint="@string/spinner_account_suit"
+            android:spinnerMode="dropdown"
+            android:textSize="15.0sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/spinner_organization"
+            android:textSize="15.0sp" />
+
+        <Spinner
+            android:id="@+id/sp_organization"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:gravity="right"
+            android:hint="@string/spinner_organization"
+            android:spinnerMode="dropdown"
+            android:textSize="15.0sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_user"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/login_user"
+        android:inputType="phone"
+        android:textColor="#333333"
+        android:textColorHint="#ff03a9f4"
+        android:textSize="15.0sp" />
+
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/login_passward"
+        android:inputType="textPassword"
+        android:textColor="#333333"
+        android:textColorHint="#ff03a9f4"
+        android:textSize="15.0sp" />
+
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
+        android:background="#03A9F4"
+        android:text="@string/login_button"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+</LinearLayout>

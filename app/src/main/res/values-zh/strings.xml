@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">餐券扫码</string>
+    <string name="title">餐券扫码</string>
+    <string name="spinner_account_suit">请选择账套</string>
+    <string name="spinner_organization">请选择组织</string>
+    <string name="login_user">请输入你的用户名</string>
+    <string name="login_passward">请输入你的密码</string>
+    <string name="login_button">登录</string>
+    <string name="start_scan_qrcode">开始扫码</string>
+    <string name="switch_scan_device">启用摄像头扫码</string>
+    <string name="wait">请稍等</string>
+    <string name="loading">加载中...</string>
+    <string name="connected">已连接扫码设备</string>
+    <string name="unconnected">请连接扫码器</string>
+    <string name="welcome">欢迎使用金帝餐券扫描仪，请登录</string>
+    <string name="failed_to_get_account_suit_list">获取账套列表失败：%1$s</string>
+    <string name="error">错误</string>
+    <string name="retry">重试</string>
+    <string name="failed_to_get_organization_list">获取组织列表失败：%1$s</string>
+    <string name="login_successfully">登录成功</string>
+    <string name="login_failed">登录失败：%1$s</string>
+    <string name="confirm">确定</string>
+    <string name="scan_success">扫码成功</string>
+    <string name="meal_voucher_valid">餐券有效</string>
+    <string name="invalid_meal_voucher">餐券无效</string>
+    <string name="explanation">
+        1、连接商米小闪进行扫码\n\n
+        2、点击切换扫码设备可启用本机摄像头进行扫码
+    </string>
+    <string name="camera_scan">启用摄像头进行扫码</string>
+    <string name="device_not_recognized">无法识别该设备</string>
+    <string name="invalid_qr_code">无效二维码</string>
+    <string name="exit_remind">你确定要退出吗?</string>
+    <string name="cancel">取消</string>
+    <string name="exit">退出APP</string>
+    <string name="sign_out">退出登录</string>
+    <string name="sign_out_remind">确定要退出当前账号吗?</string>
+</resources>

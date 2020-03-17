@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Meal Coupon</string>
+    <string name="title">Meal coupon scan</string>
+    <string name="spinner_account_suit">Please choose Account Suit</string>
+    <string name="spinner_organization">Please choose Organization</string>
+    <string name="login_user">Please enter your account</string>
+    <string name="login_passward">Please enter your passward</string>
+    <string name="login_button">Login</string>
+    <string name="start_scan_qrcode">Start scan QrCode</string>
+    <string name="switch_scan_device">Enable camera to scan</string>
+    <string name="wait">Please wait</string>
+    <string name="loading">Loading...</string>
+    <string name="connected">Scanner device connected</string>
+    <string name="unconnected">Please connect the scanner</string>
+    <string name="welcome">Welcome to Gold Emperor scanner, please log in</string>
+    <string name="failed_to_get_account_suit_list">Failed to get Account Suit list:%1$s</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="failed_to_get_organization_list">Failed to get Organization list：%1$s</string>
+    <string name="login_successfully">Login successfully</string>
+    <string name="login_failed">Login failed:%1$s</string>
+    <string name="confirm">Confirm</string>
+    <string name="scan_success">Successful scan code</string>
+    <string name="meal_voucher_valid">Meal voucher valid</string>
+    <string name="invalid_meal_voucher">Invalid meal voucher</string>
+    <string name="explanation">
+        1. Connect the merchant Mi Xiaoshan to scan the code\n\n
+        2. Click switch code scanning device to enable local camera to scan code
+    </string>
+    <string name="camera_scan">Enable camera to scan</string>
+    <string name="device_not_recognized">The device is not recognized</string>
+    <string name="invalid_qr_code">Invalid QR code</string>
+    <string name="exit">Exit App</string>
+    <string name="exit_remind">Are you sure you want to quit?</string>
+    <string name="cancel">cancel</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sign_out_remind">Are you sure you want to exit the current account?</string>
+
+
+</resources>
