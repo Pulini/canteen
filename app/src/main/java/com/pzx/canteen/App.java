@@ -1,12 +1,13 @@
 package com.pzx.canteen;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
-import com.pzx.canteen.http.Constants;
 
+import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 
 
 /**
@@ -19,12 +20,15 @@ import com.pzx.canteen.http.Constants;
 public class App extends Application {
 
     public static SharedPreferences mSharedPreferences;
-
+    public static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mSharedPreferences = getSharedPreferences(Constants.APPLICATION_NAME, MODE_PRIVATE);
+        context=this;
+//        mSharedPreferences = getSharedPreferences(APPLICATION_NAME, MODE_PRIVATE);
         SpeechUtility.createUtility(this, SpeechConstant.APPID +"=5bf3520c");
+        JAnalyticsInterface.init(this);
+//        JAnalyticsInterface.setDebugMode(true);
     }
 }

@@ -1,104 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_BKG"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@mipmap/bkg"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="30dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:shadowColor="#ffffff"
-        android:shadowDx="5"
-        android:shadowDy="-5"
-        android:shadowRadius="1"
-        android:text="@string/app_name"
-        android:textColor="#03A9F4"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+    <data>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        <variable
+            name="data"
+            type="com.pzx.canteen.newApp.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bkg">
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:singleLine="true"
-            android:text="@string/spinner_account_suit"
-            android:textSize="15.0sp" />
+            android:shadowColor="#ffffff"
+            android:shadowDx="5"
+            android:shadowDy="-5"
+            android:shadowRadius="1"
+            android:text="@string/app_name"
+            android:textColor="@color/blue"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/til_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/sp_account_suit"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="right"
-            android:hint="@string/spinner_account_suit"
-            android:spinnerMode="dropdown"
-            android:textSize="15.0sp" />
-    </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:hint="@string/login_user"
+            android:textColorHint="@color/blue"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/blue"
+            app:hintTextColor="@color/blue"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_edit_round_hollow_3_2_50_white"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="5dp"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:text="@={data.phone}"
+                android:nextFocusForward="@id/et_password"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/blue"
+                tools:text="15868587600" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:hint="@string/login_password"
+            android:textColorHint="@color/blue"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/blue"
+            app:hintTextColor="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/blue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_edit_round_hollow_3_2_50_white"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="5dp"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:text="@={data.password}"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/blue"
+                tools:text="123456" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/button_circle_shape"
+            android:text="@string/login_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_password" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="@string/spinner_organization"
-            android:textSize="15.0sp" />
-
-        <Spinner
-            android:id="@+id/sp_organization"
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:gravity="right"
-            android:hint="@string/spinner_organization"
-            android:spinnerMode="dropdown"
-            android:textSize="15.0sp" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/et_user"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/login_user"
-        android:inputType="phone"
-        android:textColor="#333333"
-        android:textColorHint="#ff03a9f4"
-        android:textSize="15.0sp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
 
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/login_passward"
-        android:inputType="textPassword"
-        android:textColor="#333333"
-        android:textColorHint="#ff03a9f4"
-        android:textSize="15.0sp" />
-
-
-    <Button
-        android:id="@+id/bt_login"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:background="#03A9F4"
-        android:text="@string/login_button"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

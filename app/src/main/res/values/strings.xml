@@ -4,7 +4,7 @@
     <string name="spinner_account_suit">Please choose Account Suit</string>
     <string name="spinner_organization">Please choose Organization</string>
     <string name="login_user">Please enter your account</string>
-    <string name="login_passward">Please enter your passward</string>
+    <string name="login_password">Please enter your passward</string>
     <string name="login_button">Login</string>
     <string name="start_scan_qrcode">Start scan QrCode</string>
     <string name="switch_scan_device">Enable camera to scan</string>
@@ -30,11 +30,19 @@
     <string name="camera_scan">Enable camera to scan</string>
     <string name="device_not_recognized">The device is not recognized</string>
     <string name="invalid_qr_code">Invalid QR code</string>
+    <string name="meal_voucher_used">Meal voucher used</string>
     <string name="exit">Exit App</string>
     <string name="exit_remind">Are you sure you want to quit?</string>
     <string name="cancel">cancel</string>
     <string name="sign_out">Sign out</string>
     <string name="sign_out_remind">Are you sure you want to exit the current account?</string>
+    <string name="wrong_account">Please log in with the canteen administrator account !</string>
+    <string name="voucher_valid">Valid</string>
+    <string name="voucher_invalid">Invalid</string>
+    <string name="voucher_used">Used</string>
 
-
+    <string name="dialog_tips_title">Reminder</string>
+    <string name="dialog_tips_bt_confirm">I got it</string>
+    <string name="logging">Logging...</string>
+    <string name="submitting">Submitting...</string>
 </resources>
