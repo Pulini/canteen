@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
-import com.pzx.canteen.MainActivity
 import com.pzx.canteen.R
-import com.pzx.canteen.databinding.ActivityNewLoginBinding
+import com.pzx.canteen.databinding.ActivityLoginBinding
+
 
 /**
  * File Name : LoginActivity
@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity(), LifecycleObserver {
         TipsDialog(this)
     }
 
-    private lateinit var binding: ActivityNewLoginBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity(), LifecycleObserver {
             }
         }
 
-        binding = DataBindingUtil.setContentView<ActivityNewLoginBinding>(this, R.layout.activity_login).apply {
+        binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login).apply {
             lifecycleOwner = this@LoginActivity
             data = viewModel
             btLogin.setOnClickListener { viewModel.login() }
