@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if(sharedGet(SHP_KEY_USER_PASSWORD,"").toString().isNotEmpty()){
             startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
             finish()

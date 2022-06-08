@@ -14,11 +14,10 @@ import retrofit2.http.Query
 
 interface  WebApi {
 
-    @POST("api/User/Login")
+    @POST("api/User/CanteenLogin")
     suspend fun login(
             @Query("Phone") Phone: String,
             @Query("Password") Password: String,
-            @Query("VCode") VCode: String="643179",
             @Header("Language") Language: String ="zh"
     ): Response<UserBean>
 

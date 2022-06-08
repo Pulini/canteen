@@ -5,10 +5,7 @@ import android.content.Intent
 import android.hardware.Camera
 import android.hardware.Camera.AutoFocusCallback
 import android.hardware.Camera.PreviewCallback
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.os.*
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.View
@@ -20,6 +17,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import cn.jiguang.analytics.android.api.CountEvent
+import cn.jiguang.analytics.android.api.JAnalyticsInterface
 import com.pzx.canteen.R
 import com.pzx.canteen.databinding.ActivityHomeBinding
 import com.pzx.canteen.scan.SoundUtils
@@ -35,31 +34,19 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Created by : PanZX on  2021/03/10 14:06
  * Email : 644173944@qq.com
  * Github : https://github.com/Pulini
- * Remark :
+ * Remark :15888425237
  */
 class HomeActivity : AppCompatActivity(), LifecycleObserver, SurfaceHolder.Callback {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var viewModel: HomeViewModel
-    private val loadingDialog: LoadingDialog by lazy {
-        LoadingDialog(this)
-    }
-    private val tipsDialog: TipsDialog by lazy {
-        TipsDialog(this)
-    }
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
+    private val tipsDialog: TipsDialog by lazy { TipsDialog(this) }
+    private val tts: TTSUtils by lazy { TTSUtils(this) }
 
-    private val tts: TTSUtils by lazy {
-        TTSUtils(this)
-    }
     private val requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
-    ) {
-        if (it) {
-            init()
-        } else {
-            finish()
-        }
-    }
+    ) { if (it) init() else finish() }
 
 
     private var mCamera: Camera? = null
@@ -82,13 +69,17 @@ class HomeActivity : AppCompatActivity(), LifecycleObserver, SurfaceHolder.Callb
 
     private val isRUN = AtomicBoolean(false)
 
-
     private var mHandler: Handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            if (msg.what == -99) {
-                if (null != mCamera) {
-                    mCamera?.autoFocus(this@HomeActivity.autoFocusCallback)
+            when(msg.what){
+                -1->{
+                    viewModel.saveCode.value=""
+                }
+                -99->{
+                    if (null != mCamera) {
+                        mCamera?.autoFocus(this@HomeActivity.autoFocusCallback)
+                    }
                 }
             }
         }
@@ -103,7 +94,7 @@ class HomeActivity : AppCompatActivity(), LifecycleObserver, SurfaceHolder.Callb
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java).apply {
-          
+
             loading.observe(this@HomeActivity) {
                 if (it.isEmpty()) {
                     mCamera?.startPreview()
@@ -126,14 +117,43 @@ class HomeActivity : AppCompatActivity(), LifecycleObserver, SurfaceHolder.Callb
             msg.observe(this@HomeActivity) {
                 if (it.isNotEmpty()) {
                     tts.startSpeaking(it)
-                    when (it) {
-                        "无效餐券", "餐券扫码失败" -> showInvalid()
-                        "该餐券已使用" -> showUsed()
-                        else -> showValid()
+                    val type = when (it) {
+                        "无效餐券" -> {
+                            showInvalid()
+                            "codeError"
+                        }
+                        "餐券扫码失败" -> {
+                            showInvalid()
+                            "codeError"
+                        }
+                        "该餐券已使用" -> {
+                            showUsed()
+                            "scanError"
+                        }
+                        else -> {
+                            showValid()
+                            "scanSuccess"
+                        }
                     }
+                    JAnalyticsInterface.onEvent(
+                            this@HomeActivity,
+                            CountEvent(type).apply {
+                                addKeyValue("UserID", sharedGet(SHP_KEY_USER_PHONE, "").toString())
+                                addKeyValue("QRCode", qrCode.value)
+                                addKeyValue("Message", it)
+                            }
+                    )
                     isRUN.set(false)
                     msg.value = ""
                     mCamera?.startPreview()
+                }
+            }
+
+            saveCode.observe(this@HomeActivity){
+                LOG.e("saveCode=$it")
+                if(it.isNotEmpty()){
+                    if(mHandler.hasMessages(-1))mHandler.removeMessages(-1)
+                    mHandler.sendEmptyMessageDelayed(-1,5000)
                 }
             }
         }
@@ -268,11 +288,17 @@ class HomeActivity : AppCompatActivity(), LifecycleObserver, SurfaceHolder.Callb
             source.data = data //填充数据
 
             if (scanner.scanImage(source) != 0) {
-                soundUtils.playSound(0, SoundUtils.SINGLE_PLAY)
                 scanner.results.map {
-                    mCamera?.stopPreview()
-                    LOG.e("Result=${it.result}")
-                    viewModel.updateCanteenQRCard(it.result)
+                    LOG.e("isEmpty=${viewModel.saveCode.value!!.isEmpty()}")
+                    LOG.e("equals=${it.result != viewModel.saveCode.value}")
+                    if (viewModel.saveCode.value!!.isEmpty()||it.result != viewModel.saveCode.value) {
+                        soundUtils.playSound(0, SoundUtils.SINGLE_PLAY)
+                        mCamera?.stopPreview()
+                        LOG.e("Result=${it.result}")
+                        viewModel.updateCanteenQRCard(it.result)
+                    }else{
+                        isRUN.set(false)
+                    }
                 }
             } else {
                 isRUN.set(false)
